@@ -1,0 +1,36 @@
+{
+  "name": "coexpress",
+  "version": "0.0.0",
+  "description": "let your express app.use(function * (req, res, next) {})",
+  "main": "index.js",
+  "scripts": {
+    "test": "rm -rf coverage/ && prove --exec \"istanbul cover --include-pid --report none --print none\" test/cases/*.js && istanbul report --report cobertura --report html --report text-summary"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/undoZen/coexpress.git"
+  },
+  "keywords": [
+    "co",
+    "express",
+    "koa",
+    "conext"
+  ],
+  "author": "undoZen <opensource@undozen.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/undoZen/coexpress/issues"
+  },
+  "homepage": "https://github.com/undoZen/coexpress#readme",
+  "devDependencies": {
+    "express": "^4.13.1",
+    "istanbul": "^0.3.17",
+    "promisingagent": "^3.0.0",
+    "tape": "^4.0.1"
+  },
+  "dependencies": {
+    "co": "^4.6.0",
+    "conext": "^1.2.1",
+    "methods": "~1.1.1"
+  }
+}
