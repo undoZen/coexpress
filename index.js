@@ -11,7 +11,9 @@ var wrapgf = exports.wrapAllGeneratorFunction = function (args) {
     var GeneratorFunction = (function *(){}).constructor;
     var results = args.slice();
     args.forEach(function (arg, i) {
-        if (typeof arg === 'function' && arg instanceof GeneratorFunction) {
+        if ((typeof arg === 'function' && arg instanceof GeneratorFunction) ||
+            (typeof arg.__generatorFunction__ === 'function' &&
+                arg.__generatorFunction__ instanceof GeneratorFunction)) {
             results[i] = conext(arg);
         }
     });

@@ -1,6 +1,7 @@
 'use strict';
 var express = require('express');
 var coexpress = require('../../../');
+var co = require('co');
 coexpress(express);
 
 var app = express();
@@ -15,6 +16,13 @@ app.use(function *(req, res, next) {
     });
     next();
 });
+
+app.get('/test', co.wrap(function *(req, res, next) {
+    res.body.wrapped = yield new Promise(function (resolve) {
+        resolve(true);
+    });
+    next();
+}));
 
 app.get('/test', function *(req, res, next) {
     res.body.inAppGet = yield new Promise(function (resolve) {
