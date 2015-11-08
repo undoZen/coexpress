@@ -33,6 +33,11 @@ app.get('/test', function *(req, res, next) {
     next();
 });
 
+app.get('/test', function (req, res, next) {
+    res.body.normal = true;
+    next();
+});
+
 var router = express.Router();
 router.all('/test', function *(req, res, next) {
     res.body.inNewRouterAll = yield new Promise(function (resolve) {

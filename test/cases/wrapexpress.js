@@ -7,7 +7,7 @@ var co = require('co');
 tape('augment express', function (test) {
     var app = require('../examples/express');
     var server = http.createServer(app);
-    test.plan(5);
+    test.plan(6);
 
     server.listen(function () {
         var port = this.address().port;
@@ -18,6 +18,7 @@ tape('augment express', function (test) {
             console.log(body);
             test.equal(body.path, '/test');
             test.ok(body.wrapped);
+            test.ok(body.normal);
             test.ok(body.inAppGet);
             test.ok(body.inNewRouterAll);
             test.ok(body.timePassed >= 1000);
