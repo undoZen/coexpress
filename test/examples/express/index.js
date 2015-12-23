@@ -1,7 +1,6 @@
 'use strict';
 var express = require('express');
 var coexpress = require('../../../');
-var co = require('co');
 coexpress(express);
 
 var app = express();
@@ -14,13 +13,16 @@ app.use(function *(req, res, next) {
             resolve(req.path);
         });
     });
+    console.log(1);
     next();
 });
 
-app.get('/test', co.wrap(function *(req, res, next) {
+app.get('/test', require('bluebird').coroutine(function *(req, res, next) {
+    console.log(1.5);
     res.body.wrapped = yield new Promise(function (resolve) {
         resolve(true);
     });
+    console.log(2);
     next();
 }));
 
@@ -30,6 +32,7 @@ app.get('/test', function *(req, res, next) {
             resolve(true);
         }, 500);
     });
+    console.log(3);
     next();
 });
 
@@ -52,6 +55,12 @@ app.use(router);
 
 app.use(function (req, res, next) {
     res.json(res.body);
+})
+
+app.use(function (err, req, res, next) {
+    console.log(err.stack);
+    res.status = 500;
+    res.end('internal error');
 })
 
 module.exports = app;

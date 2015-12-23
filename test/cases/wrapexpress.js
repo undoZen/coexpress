@@ -2,7 +2,6 @@
 var http = require('http');
 var tape = require('tape');
 var proagent = require('promisingagent');
-var co = require('co');
 
 tape('augment express', function (test) {
     var app = require('../examples/express');
@@ -11,7 +10,8 @@ tape('augment express', function (test) {
 
     server.listen(function () {
         var port = this.address().port;
-        co(function *() {
+        console.log(port);
+        require('bluebird').coroutine(function *() {
             console.log('port:', port);
             var r = yield proagent('GET', 'http://127.0.0.1:' + port + '/test');
             var body = r.body;
@@ -23,6 +23,6 @@ tape('augment express', function (test) {
             test.ok(body.inNewRouterAll);
             test.ok(body.timePassed >= 1000);
             server.close();
-        });
+        })();
     });
 })

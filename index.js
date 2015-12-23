@@ -8,7 +8,6 @@ module.exports = exports = function (express) {
 }
 
 var wrapgf = exports.wrapAllGeneratorFunction = function (args) {
-    var GeneratorFunction = (function *(){}).constructor;
     var results = args.slice();
     args.forEach(function (arg, i) {
         if (typeof arg === 'function') {
@@ -31,6 +30,7 @@ function augmentProtoMethod(method) {
         proto[method] = (function(origMethod) {
             return function () {
                 var args = wrapgf(_slice.call(arguments));
+                console.log(args);
                 return origMethod.apply(this, args);
             }
         }(proto[method]));

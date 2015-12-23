@@ -12,6 +12,7 @@
   },
   "keywords": [
     "co",
+    "bluebird",
     "express",
     "koa",
     "conext"
@@ -23,14 +24,14 @@
   },
   "homepage": "https://github.com/undoZen/coexpress#readme",
   "devDependencies": {
-    "express": "^4.13.1",
-    "istanbul": "^0.3.17",
-    "promisingagent": "^3.0.0",
-    "tape": "^4.0.1"
+    "express": "^4",
+    "istanbul": "^0.3",
+    "promisingagent": "^4",
+    "tape": "^4"
   },
   "dependencies": {
-    "co": "^4",
-    "conext": "^1.3",
+    "bluebird": "^3",
+    "conext": "^2.0.3",
     "methods": "~1.1.1"
   }
 }
