@@ -30,7 +30,6 @@ function augmentProtoMethod(method) {
         proto[method] = (function(origMethod) {
             return function () {
                 var args = wrapgf(_slice.call(arguments));
-                console.log(args);
                 return origMethod.apply(this, args);
             }
         }(proto[method]));
