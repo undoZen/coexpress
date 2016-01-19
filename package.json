@@ -30,8 +30,8 @@
     "tape": "^4"
   },
   "dependencies": {
-    "bluebird": "^3",
-    "conext": "^2.0.3",
+    "bluebird": "^2.10.2",
+    "conext": "^2.0.5",
     "methods": "~1.1.1"
   }
 }
