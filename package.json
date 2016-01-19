@@ -1,6 +1,6 @@
 {
   "name": "coexpress",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "let your express app.use(function * (req, res, next) {})",
   "main": "index.js",
   "scripts": {
