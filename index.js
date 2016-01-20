@@ -27,11 +27,13 @@ var augmentRoute = exports.augmentRoute = function (Route) {
 }
 function augmentProtoMethod(method) {
     return function (proto) {
-        proto[method] = (function(origMethod) {
-            return function () {
-                var args = wrapgf(_slice.call(arguments));
-                return origMethod.apply(this, args);
-            }
-        }(proto[method]));
+        var origMethod = proto[method];
+        if (method === 'del' && !origMethod) {
+            origMethod = proto['delete'];
+        }
+        proto[method] = function () {
+            var args = wrapgf(_slice.call(arguments));
+            return origMethod.apply(this, args);
+        }
     }
 }
