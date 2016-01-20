@@ -24,15 +24,19 @@ app.get('/test', require('bluebird').coroutine(function *(req, res, next) {
     });
     console.log(2);
     next();
+    return 'aaa '+Date.now()
 }));
 
 app.get('/test', function *(req, res, next) {
+    console.log(1, Date.now());
     res.body.inAppGet = yield new Promise(function (resolve) {
         setTimeout(function () {
+    console.log(2, Date.now());
             resolve(true);
         }, 500);
     });
     console.log(3);
+    console.log(3, Date.now());
     next();
 });
 
@@ -43,12 +47,17 @@ app.get('/test', function (req, res, next) {
 
 var router = express.Router();
 router.all('/test', function *(req, res, next) {
+    console.log(4, Date.now());
+    console.log(res.body);
     res.body.inNewRouterAll = yield new Promise(function (resolve) {
         setTimeout(function () {
+    console.log(5, Date.now());
             resolve(true);
         }, 500);
     });
+    console.log(6, Date.now());
     res.body.timePassed = Date.now() - res.startedAt;
+    console.log(res.body);
     next();
 });
 app.use(router);
